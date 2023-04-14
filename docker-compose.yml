@@ -1,0 +1,30 @@
+version: "3"
+services:
+  app:
+    build: .
+    ports:
+      - 8081:8081
+    environment:
+      - DATABASE_HOST=postgres
+    volumes:
+      - .:/app
+    # dependes_on:
+    #   - postgres
+    command: bash -c "npx knex migrate:latest && npm run dev"
+    # restart: on-failure
+  
+  postgres:
+    image: "postgres"
+    ports:
+      - 5431:5431
+    environment:
+      POSTGRES_USER: "desafio"
+      POSTGRES_PASSWORD: "desafio"
+      POSTGRES_DB: "desafio"
+    command: -p 5431
+  
+  redis:
+    image: "redis"
+    ports:
+      - 6379:6379
+    

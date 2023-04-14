@@ -1,0 +1,58 @@
+openapi: 3.0.1
+info:
+  title: Aplicacao node
+  description: Api simples
+  version: 1.0.0
+servers: 
+  - url: /api
+tags:
+  - name: crud
+    description: um crud simples
+paths:
+  /users:
+    get:
+      tags:
+      - crud
+      security:
+        - token: []
+      description: Trazer usuários
+      operationId: get_users_all
+      x-eov-operation-handler: controllers/user_controller.cjs
+      responses:
+        "200":
+          description: "success"
+    post:
+      tags:
+      - crud
+      security:
+        - token: []
+      description: Cadastrar usuários
+      operationId: post_user
+      x-eov-operation-handler: controllers/user_controller.cjs
+      requestBody: 
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: 
+                name:
+                  type: string
+                email:
+                  type: string
+      responses:
+        "201":
+          description: "sucess"
+    delete:
+      tags:
+      - crud
+      security: 
+        - token: []
+      description: Deletar usuários
+      operationId: delete_users
+      x-eov-operation-handler: controllers/user_controller.cjs
+      responses:
+        "204":
+          description: deletando usuários
+
+
+
